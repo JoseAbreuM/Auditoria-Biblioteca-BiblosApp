@@ -272,11 +272,11 @@
           </div>
         </div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mh-100">
-          <h1 class="2">Menú Libros </h1>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mh-100 bgrounded-2">
+          <h1 class="c-w ">Menú Libros </h1>
           <% if (libros) { %>
-            <div class="container mt-4">
-              <div class="card-header">Editar Registros </div>
+            <div class="container mt-4 tile">
+              <h3>Editar Libro</h3>
               <div class="card-body bot-m">
                 <form action="/updateBook" method="POST">
                   <input id="id" name="id" value="<%=libros.id%>" hidden>
@@ -322,14 +322,16 @@
                       </option>
                       <option <%=libros.Carrera=='Administracion' ? "selected" : '' %>
                         value="Administracion">Administracion</option>
-                      <option <%=libros.Carrera=='Tecnologia de los Alimentos' ? "selected" : '' %>value="Tecnologia de
+                      <option <%=libros.Carrera=='Tecnologia de los Alimentos' ? "selected" : '' %>value="Tecnologia
+                        de
                         los Alimentos">Tecnologia de los Alimentos</option>
                     </select>
                   </div>
                   <div class="mb-3">
                     <label for="libro" class="form-label">Estado</label>
                     <select class="form-select" id="Estado" name="Estado" aria-label="Default select example">
-                      <option <%=libros.Estado=='Disponible' ? "selected" : '' %> value="Disponible">Disponible</option>
+                      <option <%=libros.Estado=='Disponible' ? "selected" : '' %> value="Disponible">Disponible
+                      </option>
                       <option <%=libros.Estado=='Agotado' ? "selected" : '' %> value="Agotado">Agotado</option>
                     </select>
                   </div>
@@ -345,6 +347,9 @@
         </main>
       </div>
     </div>
+    <footer>
+      <p>Copyright © Abreu, Ocumito, Latencio, La Tichel, la Presi y otro gentio </p>
+    </footer>
     <script src="../../js/bootstrap.bundle.min.js"></script>
 
     <script src="../../js/chart.umd.js"

@@ -278,18 +278,19 @@
           </div>
         </div>
         <!-- PARTE PRINCIPAL DEL MENU -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 p-0  mh-100">
+        <main class="col-md-9 ms-sm-auto col-lg-10 p-0  mh-100 bgrounded-2">
 
 
           <div class="container m-0 p-0 m-1 ">
-            <h1 class="2  ms-4" style="margin-top:10px ;">Menú Profesores </h1>
-            <a href="/teachers/create" class="btn btn-outline-primary mt-1" style="margin-left: 10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-              </svg></a>
-            <div class="tile table-responsive mxw90">
+            <h1 class="c-w  ms-4" ">Menú Profesores </h1>
+           
+              <div class=" tile table-responsive mxw90">
+              <a href=" /teachers/create" class="btn btn-outline-primary mt-1" style="margin-left: 10px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+                  viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                </svg></a>
               <table id="tablaProfesores" class="table table-striped table-bordered text-center caption-top mw100">
                 <caption>Lista de Profesores</caption>
                 <thead class="table-dark">
@@ -328,80 +329,84 @@
                 </tbody>
               </table>
 
-            </div>
           </div>
-        </main>
       </div>
+      </main>
     </div>
+  </div>
 
-    <!-- jQuery -->
-    <script src="../../js/jquery-3.5.1.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="../../js/jquery.dataTables.min.js"></script>
-    <!-- DataTables Bootstrap JS -->
-    <script src="../../js/dataTables.bootstrap5.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="../../js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/datatables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="../../js/jquery-3.5.1.js"></script>
+  <footer>
+    <p>Copyright © Abreu, Ocumito, Latencio, La Tichel, la Presi y otro gentio </p>
+  </footer>
 
-    <script src="../../chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
-      crossorigin="anonymous"></script>
-    <script src="../../js/dashboard.js"></script>
-    <script src="../../js/sweetalert2.all.min.js"></script>
+  <!-- jQuery -->
+  <script src="../../js/jquery-3.5.1.min.js"></script>
+  <!-- DataTables JS -->
+  <script src="../../js/jquery.dataTables.min.js"></script>
+  <!-- DataTables Bootstrap JS -->
+  <script src="../../js/dataTables.bootstrap5.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../js/datatables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="../../js/jquery-3.5.1.js"></script>
 
-    <script>
+  <script src="../../chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
+    crossorigin="anonymous"></script>
+  <script src="../../js/dashboard.js"></script>
+  <script src="../../js/sweetalert2.all.min.js"></script>
 
-      let table = new DataTable('#tablaProfesores', {
+  <script>
 
-        responsive: true,
-        layout: {
-          topStart: {
-            buttons: [{
-              extend: 'print',
-              text: 'Imprimir',
-              exportOptions: {
-                columns: ':visible'
-              }
-            },
-            {
-              extend: 'excel',
-              exportOptions: {
-                columns: ':visible'
-              }
-            },
-            {
-              extend: 'pdf',
-              exportOptions: {
-                columns: ':visible'
-              }
-            },
-            {
-              extend: 'colvis',
-              text: 'Columnas Visibles'
+    let table = new DataTable('#tablaProfesores', {
+
+      responsive: true,
+      layout: {
+        topStart: {
+          buttons: [{
+            extend: 'print',
+            text: 'Imprimir',
+            exportOptions: {
+              columns: ':visible'
             }
-            ]
+          },
+          {
+            extend: 'excel',
+            exportOptions: {
+              columns: ':visible'
+            }
+          },
+          {
+            extend: 'pdf',
+            exportOptions: {
+              columns: ':visible'
+            }
+          },
+          {
+            extend: 'colvis',
+            text: 'Columnas Visibles'
           }
+          ]
         }
-      });
+      }
+    });
 
 
-      // function confirmar(id) {
-      //   Swal.fire({
-      //     title: "¿Confirma eliminar el registro?",
-      //     icon: 'warning',
-      //     showCancelButton: true,
-      //     confirmButtonColor: '#3085d6',
-      //     cancelButtonColor: '#d33',
-      //     confirmButtonText: "Confirmar"
-      //   }).then((result) => {
+    // function confirmar(id) {
+    //   Swal.fire({
+    //     title: "¿Confirma eliminar el registro?",
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: "Confirmar"
+    //   }).then((result) => {
 
-      //     if (result.isConfirmed) {
-      //       window.location = './delete/' + id;
-      //     }
-      //   });
-      // }
-    </script>
+    //     if (result.isConfirmed) {
+    //       window.location = './delete/' + id;
+    //     }
+    //   });
+    // }
+  </script>
 
 </body>
 
