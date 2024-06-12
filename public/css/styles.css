@@ -259,7 +259,9 @@ footer p{
           padding: 10px;
         }
 
-
+                .mxw100 {
+                  max-width: 90vw;
+                }
 .register {
 position: relative;
   background: #ffffffa2;
