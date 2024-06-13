@@ -328,7 +328,7 @@
                         <%= sancion.fecha_inicio %>
                       </td>
                       <td>
-                        <%= sancion.fecha_fin %>
+                        <%= sancion.fecha_fin ? sancion.fecha_fin : 'Indefinido' %>
                       </td>
                       <td>
                         <%= sancion.estado %>

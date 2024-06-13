@@ -689,7 +689,7 @@ router.get('/fines/sanciones', (req, res) => {
                     nombre_solicitante: nombreSolicitante,
                     Descripcion: sancion.Descripcion,
                     fecha_inicio: moment(sancion.fecha_inicio).format('DD/MM/YYYY'),
-                    fecha_fin: moment(sancion.fecha_fin).format('DD/MM/YYYY'),
+                    fecha_fin: sancion.fecha_fin ? moment(sancion.fecha_fin).format('DD/MM/YYYY') : 'Indefinido',
                     estado: sancion.Estado
                 };
 
@@ -713,6 +713,7 @@ router.get('/fines/sanciones', (req, res) => {
 
     main();
 });
+
 
 
 // RUTA PARA CULMINAR SANCION

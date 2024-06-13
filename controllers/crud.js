@@ -465,6 +465,7 @@ exports.validateLoan = (req, res) => {
     });
 };
 
+
 // Guardar la sanción
 exports.saveSanction = (req, res) => {
     const { loanId, description, indefinite, startDate, endDate, status } = req.body;
@@ -497,7 +498,7 @@ exports.saveSanction = (req, res) => {
             INSERT INTO sancion (id_prestamo, Descripcion, fecha_inicio, fecha_fin, Estado)
             VALUES (?, ?, ?, ?, ?)
         `;
-        const sanctionValues = [loanId, description, indefinite ? null : startDate, indefinite ? null : endDate, status];
+        const sanctionValues = [loanId, description, startDate, indefinite ? null : endDate, status];
 
         conexion.query(insertSanctionQuery, sanctionValues, (error, results) => {
             if (error) {
@@ -531,6 +532,7 @@ exports.saveSanction = (req, res) => {
     });
 };
 
+
 //////////////////EDITAR SANCIONES////////////////
 exports.updateFine = (req, res) => {
     const { id, loanId, description, indefinite, startDate, endDate, status } = req.body;
@@ -546,7 +548,7 @@ exports.updateFine = (req, res) => {
 
     // Construir la consulta de actualización
     const updateSanctionQuery = `UPDATE sancion SET id_prestamo = ?, Descripcion = ?, fecha_inicio = ?, fecha_fin = ?, Estado = ? WHERE id = ?`;
-    const updateData = [loanId, description, indefinite ? null : startDate, indefinite ? null : endDate, status, id];
+    const updateData = [loanId, description, startDate, indefinite ? null : endDate, status, id];
 
     conexion.query(updateSanctionQuery, updateData, (error, results) => {
         if (error) {

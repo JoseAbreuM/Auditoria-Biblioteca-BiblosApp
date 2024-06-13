@@ -271,6 +271,7 @@
             </div>
           </div>
         </div>
+
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mh-100 bgrounded-2">
           <h1 class="c-w">Menú Sanciones </h1>
           <div class="container mt-4 tile">
@@ -294,12 +295,12 @@
                     %>>
                   <label for="indefinite">Sanción Indefinida</label>
                 </div>
-                <div class="mb-3" id="dateFields" style="<%= sancion.fecha_fin === null ? 'display: none;' : '' %>">
+                <div class="mb-3" id="startDateField">
                   <label for="startDate" class="form-label">Fecha de Inicio</label>
                   <input type="date" class="form-control" id="startDate" name="startDate"
-                    value="<%= sancion.fecha_inicio %>">
+                    value="<%= sancion.fecha_inicio %>" required>
                 </div>
-                <div class="mb-3" id="dateFields" style="<%= sancion.fecha_fin === null ? 'display: none;' : '' %>">
+                <div class="mb-3" id="endDateField" style="<%= sancion.fecha_fin === null ? 'display: none;' : '' %>">
                   <label for="endDate" class="form-label">Fecha de Fin</label>
                   <input type="date" class="form-control" id="endDate" name="endDate" value="<%= sancion.fecha_fin %>">
                 </div>
@@ -320,26 +321,24 @@
         <footer>
           <p>Copyright © Abreu, Ocumito, Latencio, La Tichel, la Presi y otro gentio </p>
         </footer>
-
         <script>
           document.addEventListener('DOMContentLoaded', (event) => {
             const loanIdInput = document.getElementById('loanId');
             const loanIdError = document.getElementById('loanIdError');
             const indefiniteCheckbox = document.getElementById('indefinite');
+            const startDateField = document.getElementById('startDateField');
+            const endDateField = document.getElementById('endDateField');
             const startDateInput = document.getElementById('startDate');
             const endDateInput = document.getElementById('endDate');
-            const dateFields = document.querySelectorAll('#dateFields');
 
-            // Función para mostrar/ocultar campos de fecha
+            // Función para mostrar/ocultar campo de fecha de fin
             indefiniteCheckbox.addEventListener('change', () => {
               if (indefiniteCheckbox.checked) {
-                dateFields.forEach(field => field.style.display = 'none');
-                startDateInput.required = false;
-                endDateInput.required = false;
+                endDateField.style.display = 'none';
+                endDateInput.removeAttribute('required');
               } else {
-                dateFields.forEach(field => field.style.display = 'block');
-                startDateInput.required = true;
-                endDateInput.required = true;
+                endDateField.style.display = 'block';
+                endDateInput.setAttribute('required', 'true');
               }
             });
 
@@ -361,6 +360,9 @@
                 loanIdInput.setCustomValidity('');
               }
             });
+
+            // Inicializar el estado de los campos de fecha en base al checkbox
+            indefiniteCheckbox.dispatchEvent(new Event('change'));
           });
         </script>
 
@@ -370,7 +372,6 @@
             color: red;
           }
         </style>
-
 
 
 

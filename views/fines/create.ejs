@@ -290,11 +290,11 @@
                   <input type="checkbox" id="indefinite" name="indefinite">
                   <label for="indefinite">Sanción Indefinida</label>
                 </div>
-                <div class="mb-3" id="dateFields">
+                <div class="mb-3" id="startDateField">
                   <label for="startDate" class="form-label">Fecha de Inicio</label>
-                  <input type="date" class="form-control" id="startDate" name="startDate">
+                  <input type="date" class="form-control" id="startDate" name="startDate" required>
                 </div>
-                <div class="mb-3" id="dateFields">
+                <div class="mb-3" id="endDateField">
                   <label for="endDate" class="form-label">Fecha de Fin</label>
                   <input type="date" class="form-control" id="endDate" name="endDate">
                 </div>
@@ -316,21 +316,23 @@
           <p>Copyright © Abreu, Ocumito, Latencio, La Tichel, la Presi y otro gentio </p>
         </footer>
 
+
         <script>
           document.addEventListener('DOMContentLoaded', (event) => {
             const loanIdInput = document.getElementById('loanId');
             const loanIdError = document.getElementById('loanIdError');
             const indefiniteCheckbox = document.getElementById('indefinite');
-            const startDateInput = document.getElementById('startDate');
-            const endDateInput = document.getElementById('endDate');
-            const dateFields = document.querySelectorAll('#dateFields');
+            const startDateField = document.getElementById('startDateField');
+            const endDateField = document.getElementById('endDateField');
 
-            // Función para mostrar/ocultar campos de fecha
+            // Función para mostrar/ocultar campo de fecha de fin
             indefiniteCheckbox.addEventListener('change', () => {
               if (indefiniteCheckbox.checked) {
-                dateFields.forEach(field => field.style.display = 'none');
+                endDateField.style.display = 'none';
+                endDateField.querySelector('input').removeAttribute('required');
               } else {
-                dateFields.forEach(field => field.style.display = 'block');
+                endDateField.style.display = 'block';
+                endDateField.querySelector('input').setAttribute('required', true);
               }
             });
 
