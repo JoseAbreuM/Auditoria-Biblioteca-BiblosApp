@@ -45,6 +45,9 @@ radial-gradient(at 0% 0%, hsla(158,84%,66%,1) 0px, transparent 50%);
 
   .c-w{color: #fff;
   text-decoration: none;}
+  span{
+    color: #A7F2F2;
+  }
 
 .btn-bd-primary{font-weight: 600; color: #fff; background-color: #082c4d; border-color: #082c4d;}
 .btn-bd-primary:hover, .btn-bd-primary:active{ background-color: #04c4d2; color:#082c4d; border-color: #04c4d2;}
@@ -144,7 +147,7 @@ radial-gradient(at 0% 0%, hsla(158,84%,66%,1) 0px, transparent 50%);
 
 .tile {
   position: relative;
-  background: #ffffffa2;
+  background: #f2f2f276;
   border-radius: 3px;
   padding: 20px;
   margin-left: 10px;
@@ -195,6 +198,14 @@ radial-gradient(at 0% 0%, hsla(158,84%,66%,1) 0px, transparent 50%);
       max-width: 50%;
     
 
+}
+
+.sidemenu{
+background-color: #0d0d0df0;
+}
+
+h5{
+  color: #f5f5f5;
 }
 
 footer {
