@@ -1,6 +1,6 @@
 {
   "name": "biblosapp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Aplicación de gestion bibliotecaria",
   "main": "app.js",
   "scripts": {

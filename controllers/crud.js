@@ -186,7 +186,6 @@ exports.savePadmin=(req, res)=>{
       })
 }
 // ///////////////////////////////ELEMENTOS PARA TABLA DE PRESTAMOS////////////////////////
-
 exports.saveLoan = (req, res) => {
     const { bookTitle, Cantidad, applicantType, dni, loanDate, deadLine, Estado } = req.body;
 
@@ -195,12 +194,12 @@ exports.saveLoan = (req, res) => {
     conexion.query(getBookQuery, [bookTitle], (err, libros) => {
         if (err) {
             console.error('Error fetching book:', err);
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({ error: 'Internal Server Error' });
             return;
         }
 
         if (libros.length === 0) {
-            res.status(400).send('Libro no encontrado');
+            res.status(400).json({ error: 'Libro no encontrado' });
             return;
         }
 
@@ -224,19 +223,19 @@ exports.saveLoan = (req, res) => {
         conexion.query(getApplicantQuery, [dni], (err, applicantResults) => {
             if (err) {
                 console.error('Error fetching applicant:', err);
-                res.status(500).send('Internal Server Error');
+                res.status(500).json({ error: 'Internal Server Error' });
                 return;
             }
 
             if (applicantResults.length === 0) {
-                res.status(400).send('Solicitante no encontrado');
+                res.status(400).json({ error: 'Solicitante no encontrado' });
                 return;
             }
 
             const estadoSolicitante = applicantResults[0].Estado;
 
             if (estadoSolicitante === 'Sancionado') {
-                res.status(400).send('No se puede realizar el préstamo por sanción');
+                res.status(400).json({ error: 'No se puede realizar el préstamo por sanción' });
                 return;
             }
 
@@ -250,7 +249,7 @@ exports.saveLoan = (req, res) => {
             conexion.query(insertLoanQuery, loanValues, (err, results) => {
                 if (err) {
                     console.error('Error inserting loan:', err);
-                    res.status(500).send('Internal Server Error');
+                    res.status(500).json({ error: 'Internal Server Error' });
                     return;
                 }
 
@@ -265,20 +264,21 @@ exports.saveLoan = (req, res) => {
                     conexion.query(updateBookQuery, updateBookValues, (err, results) => {
                         if (err) {
                             console.error('Error updating book:', err);
-                            res.status(500).send('Internal Server Error');
+                            res.status(500).json({ error: 'Internal Server Error' });
                             return;
                         }
 
                         console.log('Libro actualizado:', results);
-                        res.redirect('/loans/prestamos');
+                        res.status(200).json({ message: 'Préstamo realizado con éxito' });
                     });
                 } else {
-                    res.redirect('/loans/prestamos');
+                    res.status(200).json({ message: 'Préstamo realizado con éxito' });
                 }
             });
         });
     });
 };
+
 
 
 
