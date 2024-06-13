@@ -365,6 +365,9 @@
     <script src="../../js/datatables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="../../js/jquery-3.5.1.js"></script>
 
+    <!-- FONT AWESOME -->
+    <script src="../../js/6208a58ae1.js" crossorigin="anonymous"></script>
+
     <script src="../../js/chart.umd.js"
       integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
       crossorigin="anonymous"></script>
@@ -382,19 +385,27 @@
           topStart: {
             buttons: [{
               extend: 'print',
-              text: 'Imprimir',
+              text: '<i class="fa-solid fa-print"></i>',
+              titleAttr: 'Imprimir',
+              className: 'btn btn-info',
               exportOptions: {
                 columns: ':visible'
               }
             },
             {
               extend: 'excel',
+              titleAttr: 'Exportar a Excel',
+              className: 'btn btn-success',
+              text: '<i class="fa-solid fa-file-excel"></i>',
               exportOptions: {
                 columns: ':visible'
               }
             },
             {
               extend: 'pdf',
+              titleAttr: 'Exportar a PDF',
+              className: 'btn btn-danger',
+              text: '<i class="fa-solid fa-file-pdf"></i>',
               exportOptions: {
                 columns: ':visible'
               }
