@@ -274,54 +274,54 @@
         </div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mh-100 bgrounded-2">
-          <h1 class="2">Menú Personal Administrativo</h1>
+          <h1 class="c-w">Menú Personal Administrativo</h1>
 
           <div class="container mt-4 tile">
-            <h3>Registrar Personal Administrativo/h3>
-              <div class="card-body bot-m">
-                <form action="/savePadmin" method="POST">
-                  <div class="mb-3">
-                    <label for="padministrativo" class="form-label">C.I</label>
-                    <input type="number" class="form-control" id="CI" name="CI" tabindex="1">
-                  </div>
-                  <div class="mb-3">
-                    <label for="padministrativo" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="Nombre" name="Nombre" tabindex="2">
-                  </div>
-                  <div class="mb-3">
-                    <label for="padministrativo" class="form-label">Escuela</label>
-                    <select class="form-select" id="Escuela" name="Escuela" aria-label="Default select example">
-                      <option value="Escuela de Ciencias del Agro y del Ambiente (ECAA)">Escuela de Ciencias del Agro y
-                        el
-                        Ambiente (ECAA)</option>
-                      <option value=" Escuela de Zootecnia"> Escuela de Zootecnia
-                      </option>
-                      <option value="Escuela de Ciencias Administrativas (ECSA)"> Escuela de Ciencias Administrativas
-                        (ECSA)</option>
-                      <option value="Escuela de Ingeniería y Ciencias Aplicadas (EICA)">Escuela de Ingeniería y Ciencias
-                        Aplicadas (EICA)</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="padministrativo" class="form-label">Telefono</label>
-                    <input type="Number" class="form-control" id="telefono" name="telefono" tabindex="8">
-                  </div>
-                  <div class="mb-3">
-                    <label for="padministrativo" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="Correo" name="Correo" tabindex="9">
-                  </div>
-                  <div class="mb-3">
-                    <label for="Titulo" class="form-label">Estado</label>
-                    <select class="form-select" id="Estado" name="Estado" aria-label="Default select example">
-                      <option value="Activo">Activo</option>
-                      <option value="Sancionado">Sancionado</option>
-                    </select>
-                  </div>
+            <h3>Registrar Personal Administrativo</h3>
+            <div class="card-body bot-m">
+              <form action="/savePadmin" method="POST">
+                <div class="mb-3">
+                  <label for="padministrativo" class="form-label">C.I</label>
+                  <input type="number" class="form-control" id="CI" name="CI" tabindex="1" required>
+                </div>
+                <div class="mb-3">
+                  <label for="padministrativo" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="Nombre" name="Nombre" tabindex="2" required>
+                </div>
+                <div class="mb-3">
+                  <label for="padministrativo" class="form-label">Escuela</label>
+                  <select class="form-select" id="Escuela" name="Escuela" aria-label="Default select example">
+                    <option value="Escuela de Ciencias del Agro y del Ambiente (ECAA)">Escuela de Ciencias del Agro y
+                      el
+                      Ambiente (ECAA)</option>
+                    <option value=" Escuela de Zootecnia"> Escuela de Zootecnia
+                    </option>
+                    <option value="Escuela de Ciencias Administrativas (ECSA)"> Escuela de Ciencias Administrativas
+                      (ECSA)</option>
+                    <option value="Escuela de Ingeniería y Ciencias Aplicadas (EICA)">Escuela de Ingeniería y Ciencias
+                      Aplicadas (EICA)</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="padministrativo" class="form-label" min="11" max="13">Telefono</label>
+                  <input type="Number" class="form-control" id="telefono" name="telefono" tabindex="8" required>
+                </div>
+                <div class="mb-3">
+                  <label for="padministrativo" class="form-label">Correo</label>
+                  <input type="email" class="form-control" id="Correo" name="Correo" tabindex="9" required>
+                </div>
+                <div class="mb-3">
+                  <label for="Titulo" class="form-label">Estado</label>
+                  <select class="form-select" id="Estado" name="Estado" aria-label="Default select example">
+                    <option value="Activo">Activo</option>
+                    <option value="Sancionado">Sancionado</option>
+                  </select>
+                </div>
 
-                  <button type="submit" class="btn btn-bd-primary" tabindex="13">Guardar</button>
-                  <a href="/apersonal/padministrativo" class="btn btn-secondary">Cancelar</a>
-                </form>
-              </div>
+                <button type="submit" class="btn btn-bd-primary" tabindex="13">Guardar</button>
+                <a href="/apersonal/padministrativo" class="btn btn-secondary">Cancelar</a>
+              </form>
+            </div>
           </div>
 
 
