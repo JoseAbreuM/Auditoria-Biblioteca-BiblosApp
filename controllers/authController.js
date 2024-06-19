@@ -115,6 +115,29 @@ exports.isAuthenticated= async (req, res, next)=>{
 
 }
 
+exports.getSecurityQuestion = (req, res) => {
+  const { Correo } = req.query;
+
+  if (!Correo) {
+    return res.json({ success: false, message: 'Correo no proporcionado' });
+  }
+
+  conexion.query('SELECT pregunta_seguridad FROM usuarios WHERE Correo = ?', [Correo], (error, results) => {
+    if (error) {
+      console.error('Error fetching user:', error);
+      return res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    }
+
+    if (results.length == 0) {
+      return res.json({ success: false, message: 'Correo no encontrado' });
+    }
+
+    const user = results[0];
+    return res.json({ success: true, securityQuestion: user.pregunta_seguridad });
+  });
+};
+
+
 exports.resetPasswordPage = (req, res) => {
   res.render('resetPassword', {
     alert: false,
@@ -123,23 +146,27 @@ exports.resetPasswordPage = (req, res) => {
     alertIcon: '',
     showConfirmButton: false,
     timer: 0,
-    ruta: ''
+    ruta: '',
+    Correo: '',  // Asegurarse de que Correo está definido
+    securityQuestion: ''  // Añadido para manejar la pregunta de seguridad
   });
 };
 
 exports.resetPass = async (req, res) => {
   try {
-    const { Correo, securityQuestion, securityAnswer } = req.body;
+    const { Correo, securityAnswer } = req.body;
 
-    if (!Correo || !securityQuestion || !securityAnswer) {
+    if (!Correo) {
       return res.render('resetPassword', {
         alert: true,
         alertTitle: "Advertencia",
-        alertMessage: "Ingrese Correo, Pregunta y Respuesta de Seguridad",
+        alertMessage: "Ingrese Correo",
         alertIcon: "info",
         showConfirmButton: true,
         timer: 100000,
-        ruta: 'resetPassword'
+        ruta: 'resetPassword',
+        Correo: '',  // Asegurarse de que Correo está definido
+        securityQuestion: ''
       });
     }
 
@@ -149,26 +176,58 @@ exports.resetPass = async (req, res) => {
         return res.status(500).send('Internal Server Error');
       }
 
-      if (results.length == 0 || results[0].pregunta_seguridad !== securityQuestion || results[0].respuesta_seguridad !== securityAnswer) {
+      if (results.length == 0) {
         return res.render('resetPassword', {
           alert: true,
           alertTitle: "Error",
-          alertMessage: "Correo y/o Pregunta y/o Respuesta incorrectas",
+          alertMessage: "Correo no encontrado",
           alertIcon: "error",
           showConfirmButton: true,
           timer: 100000,
-          ruta: 'resetPassword'
+          ruta: 'resetPassword',
+          Correo: '',  // Asegurarse de que Correo está definido
+          securityQuestion: ''
         });
       } else {
-        return res.render('resetPassword', {
-          alert: true,
-          alertTitle: "Validación Exitosa",
-          alertMessage: "Ingrese su nueva contraseña",
-          alertIcon: "success",
-          showConfirmButton: false,
-          timer: 800,
-          ruta: `resetPassword/newPassword?Correo=${Correo}`
-        });
+        const user = results[0];
+        
+        if (!securityAnswer) {
+          return res.render('resetPassword', {
+            alert: false,
+            alertTitle: '',
+            alertMessage: '',
+            alertIcon: '',
+            showConfirmButton: false,
+            timer: 0,
+            ruta: '',
+            Correo: Correo,  // Pasar el correo ingresado
+            securityQuestion: user.pregunta_seguridad
+          });
+        }
+
+        if (user.respuesta_seguridad !== securityAnswer) {
+          return res.render('resetPassword', {
+            alert: true,
+            alertTitle: "Error",
+            alertMessage: "Respuesta incorrecta",
+            alertIcon: "error",
+            showConfirmButton: true,
+            timer: 100000,
+            ruta: 'resetPassword',
+            Correo: Correo,  // Pasar el correo ingresado
+            securityQuestion: user.pregunta_seguridad
+          });
+        } else {
+          return res.render('resetPassword', {
+            alert: true,
+            alertTitle: "Validación Exitosa",
+            alertMessage: "Ingrese su nueva contraseña",
+            alertIcon: "success",
+            showConfirmButton: false,
+            timer: 800,
+            ruta: `resetPassword/newPassword?Correo=${Correo}`
+          });
+        }
       }
     });
   } catch (error) {
@@ -176,6 +235,7 @@ exports.resetPass = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
 
 exports.newPasswordPage = (req, res) => {
   const { Correo } = req.query;

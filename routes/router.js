@@ -18,6 +18,8 @@ router.get('/register', authController.isAuthenticated, (req, res)=>{
 router.get('/resetPassword', authController.resetPasswordPage);
 router.get('/resetPassword/newPassword', authController.newPasswordPage);
 
+router.get('/getSecurityQuestion', authController.getSecurityQuestion);
+
 router.get('/reports/reportes', authController.isAuthenticated, (req, res)=>{
   res.render('reports/reportes')
 })
