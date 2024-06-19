@@ -115,27 +115,47 @@ exports.isAuthenticated= async (req, res, next)=>{
 
 }
 
-exports.getSecurityQuestion = (req, res) => {
+exports.getSecurityQuestion = async (req, res) => {
   const { Correo } = req.query;
 
   if (!Correo) {
-    return res.json({ success: false, message: 'Correo no proporcionado' });
+    return res.json({
+      success: false,
+      message: 'Correo no proporcionado'
+    });
   }
 
-  conexion.query('SELECT pregunta_seguridad FROM usuarios WHERE Correo = ?', [Correo], (error, results) => {
-    if (error) {
-      console.error('Error fetching user:', error);
-      return res.status(500).json({ success: false, message: 'Error interno del servidor' });
-    }
+  try {
+    conexion.query('SELECT pregunta_seguridad FROM usuarios WHERE Correo = ?', [Correo], (error, results) => {
+      if (error) {
+        console.error('Error fetching security question:', error);
+        return res.json({
+          success: false,
+          message: 'Error al obtener la pregunta de seguridad'
+        });
+      }
 
-    if (results.length == 0) {
-      return res.json({ success: false, message: 'Correo no encontrado' });
-    }
+      if (results.length === 0) {
+        return res.json({
+          success: false,
+          message: 'Correo no encontrado'
+        });
+      }
 
-    const user = results[0];
-    return res.json({ success: true, securityQuestion: user.pregunta_seguridad });
-  });
+      return res.json({
+        success: true,
+        securityQuestion: results[0].pregunta_seguridad
+      });
+    });
+  } catch (error) {
+    console.error('Internal Server Error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Internal Server Error'
+    });
+  }
 };
+
 
 
 exports.resetPasswordPage = (req, res) => {
