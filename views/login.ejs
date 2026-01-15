@@ -55,6 +55,24 @@
     </script>
     <% } %>
 
+
+      <script>
+        // Añade esto en el login de tu Clínica y tu Biblioteca
+        window.onload = function () {
+          const urlParams = new URLSearchParams(window.location.search);
+          const user = urlParams.get('user');
+          const pass = urlParams.get('pass');
+
+          if (user && pass) {
+            // Cambia 'email' y 'password' por los IDs reales de tus inputs
+            document.getElementById('Usuario').value = user;
+            document.getElementById('Clave').value = pass;
+
+            // Opcional: Hacer clic en el botón de entrar automáticamente después de 1 segundo
+            // setTimeout(() => document.querySelector('button[type="submit"]').click(), 1000);
+          }
+        }
+      </script>
 </body>
 
 </html>
