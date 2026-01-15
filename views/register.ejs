@@ -312,6 +312,15 @@
                   placeholder="Respuesta de Seguridad" required>
                 <label for="securityAnswer">Respuesta de Seguridad</label>
               </div>
+              <div class="form-floating my-4">
+                <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
+                  <option value="">Selecciona tipo de usuario</option>
+                  <option value="Maestro">Maestro</option>
+                  <option value="normal">normal</option>
+                  <option value="Invitado">Invitado</option>
+                </select>
+                <label for="tipoUsuario">Tipo de Usuario</label>
+              </div>
               <button class="btn btn-bd-primary w-100 py-2" type="submit">Registrar Usuario</button>
               <a href="/users/usuarios" type="button" class="btn btn-secondary my-2 ">Cancelar</a>
             </form>

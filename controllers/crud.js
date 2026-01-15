@@ -68,12 +68,14 @@ exports.updateUsuario= (req, res)=>{
      const Usuario= req.body.Usuario;
       const Nombre= req.body.Nombre;
       const Correo=req.body.Correo;
+      const tipo_usuario=req.body.Tipo_usuario;
 
     conexion.query('UPDATE usuarios SET ? WHERE id=?', [{
 
         Usuario:Usuario,
         Nombre:Nombre,
         Correo:Correo,
+        Tipo_usuario:tipo_usuario
             },
         id
     ], (error, results)=>{

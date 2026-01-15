@@ -13,6 +13,9 @@ exports.register=async (req, res)=>{
       const pass=  req.body.pass
       const securityQuestion=req.body.securityQuestion
       const securityAnswer=req.body.securityAnswer
+      const tipoUsuario=req.body.tipoUsuario
+      console.log('req.body:', req.body);
+      console.log('tipoUsuario:', tipoUsuario);
       let passHash=  await bcryptjs.hash(pass, 8)
       //console.log(passHash); 
 
@@ -22,7 +25,8 @@ exports.register=async (req, res)=>{
         Correo: email,
         Clave: passHash,
         pregunta_seguridad: securityQuestion,
-        respuesta_seguridad: securityAnswer
+        respuesta_seguridad: securityAnswer,
+        Tipo_usuario: tipoUsuario
       }, (error, results)=>{
           if (error) {console.log(error);}
           res.redirect('/users/usuarios')
@@ -310,3 +314,32 @@ exports.logout= (req, res)=>{
   res.clearCookie('jwt')
   return res.redirect('/')
 }
+
+exports.checkGuest = (req, res, next) => {
+  console.log('Tipo_usuario:', req.Usuario.Tipo_usuario);
+  if (req.Usuario && req.Usuario.Tipo_usuario === 'Invitado') {
+    // Mostrar sweet alert
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <script src="/js/sweetalert2.all.min.js"></script>
+      </head>
+      <body>
+        <script>
+          Swal.fire({
+            icon: 'warning',
+            title: 'Acción no permitida',
+            text: 'Los invitados no tienen permitido realizar esta acción.',
+            confirmButtonText: 'Aceptar'
+          }).then(() => {
+            window.history.back();
+          });
+        </script>
+      </body>
+      </html>
+    `);
+  } else {
+    next();
+  }
+};

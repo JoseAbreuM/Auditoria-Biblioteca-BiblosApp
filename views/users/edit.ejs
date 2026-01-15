@@ -297,7 +297,16 @@
                     <input type="email" class="form-control" id="Correo" name="Correo" tabindex="4"
                       value="<%=usuario.Correo%>" required>
                   </div>
-                  <button type="submit" class="btn btn-bd-primary" tabindex="5">Guardar</button>
+                  <div class="mb-3">
+                    <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
+                    <select class="form-control" id="tipo_usuario" name="Tipo_usuario" tabindex="5" required>
+                      <option value="Maestro" <%=usuario.Tipo_usuario==='Maestro' ? 'selected' : '' %>>Maestro</option>
+                      <option value="normal" <%=usuario.Tipo_usuario==='normal' ? 'selected' : '' %>>normal</option>
+                      <option value="Invitado" <%=usuario.Tipo_usuario==='Invitado' ? 'selected' : '' %>>Invitado
+                      </option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-bd-primary" tabindex="6">Guardar</button>
                   <a href="/users/usuarios" class="btn btn-secondary">Cancelar</a>
                 </form>
               </div>

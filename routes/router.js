@@ -58,11 +58,11 @@ router.get('/books/libros', authController.isAuthenticated, (req, res) => {
 });
 
 //Ruta para crear registro de libros
-router.get('/books/create', (req, res)=>{
+router.get('/books/create', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
   res.render('books/create');
 })
 //Ruta para editar registros de Libros 
-router.get('/books/edit/:id', (req, res)=>{
+router.get('/books/edit/:id', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
   const id= req.params.id;
   conexion.query('SELECT * FROM libro WHERE id=?', [id], (error, results)=>{
      if (error) {
@@ -73,7 +73,7 @@ router.get('/books/edit/:id', (req, res)=>{
   })
 })
 //RUTA PARA ELIMINAR EL REGISTRO DE LIBROS
-router.get('/books/delete/:id', (req, res)=>{
+router.get('/books/delete/:id', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
      const id= req.params.id;
     conexion.query('DELETE  FROM libro WHERE id=? ', [id], (error, results)=>{
      if (error) {
@@ -100,7 +100,7 @@ router.get('/users/usuarios', authController.isAuthenticated, (req, res)=>{
 })
 
 //RUTA PARA ELIMINAR USUARIO
-router.get('/users/delete/:id', (req, res)=>{
+router.get('/users/delete/:id', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
      const id= req.params.id;
     conexion.query('DELETE  FROM usuarios WHERE id=? ', [id], (error, results)=>{
      if (error) {
@@ -113,7 +113,7 @@ router.get('/users/delete/:id', (req, res)=>{
 })
 
 //RUTA PARA EDITAR USUARIO
-router.get('/users/edit/:id', (req, res)=>{
+router.get('/users/edit/:id', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
   const id= req.params.id;
   conexion.query('SELECT * FROM usuarios WHERE id=?', [id], (error, results)=>{
      if (error) {
@@ -138,7 +138,7 @@ router.get('/teachers/profesores', authController.isAuthenticated, (req, res)=>{
   })
 })
 //Ruta para crear registro de Profesor
-router.get('/teachers/create', (req, res)=>{
+router.get('/teachers/create', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
   res.render('teachers/create');
 })
 
@@ -156,7 +156,7 @@ router.get('/students/estudiantes', authController.isAuthenticated, (req, res)=>
   })
 })
 //Ruta para crear registro de Profesor
-router.get('/students/create', (req, res)=>{
+router.get('/students/create', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
   res.render('students/create');
 })
 
@@ -174,7 +174,7 @@ router.get('/apersonal/padministrativo', authController.isAuthenticated, (req, r
   })
 })
 //Ruta para crear registro de Profesor
-router.get('/apersonal/create', (req, res)=>{
+router.get('/apersonal/create', authController.isAuthenticated, authController.checkGuest, (req, res)=>{
   res.render('apersonal/create');
 })
 
@@ -366,7 +366,7 @@ router.get('/loans/culminate/:id', (req, res) => {
 
 
 //Ruta para crear registro de prestamo
-router.get('/loans/create', authController.isAuthenticated, (req, res) => {
+router.get('/loans/create', authController.isAuthenticated, authController.checkGuest, (req, res) => {
   res.render('loans/create');
 });
 
@@ -400,7 +400,7 @@ router.get('/data/personalAdmin', (req, res) => {
 });
 
 // RUTA PARA ELIMINAR PRESTAMO
-router.get('/loans/delete/:id', (req, res) => {
+router.get('/loans/delete/:id', authController.isAuthenticated, authController.checkGuest, (req, res) => {
   const id = req.params.id;
 
   // Primero, obtener el estado del préstamo y la cantidad prestada junto con el ID del libro y los datos del solicitante
@@ -524,7 +524,7 @@ router.get('/loans/delete/:id', (req, res) => {
 });
 
 // Ruta para editar registros de Préstamos
-router.get('/loans/edit/:id', (req, res) => {
+router.get('/loans/edit/:id', authController.isAuthenticated, authController.checkGuest, (req, res) => {
   const id = req.params.id;
   conexion.query('SELECT * FROM prestamo WHERE id = ?', [id], (error, results) => {
     if (error) {
@@ -804,13 +804,13 @@ router.get('/fines/culminate/:id', (req, res) => {
 });
 
 //RUTA PARA CREAR SANCIÓN
-router.get('/fines/create', authController.isAuthenticated, (req, res) => {
+router.get('/fines/create', authController.isAuthenticated, authController.checkGuest, (req, res) => {
   res.render('fines/create');
 });
 
 
 // RUTA PARA ELIMINAR SANCIÓN
-router.get('/fines/delete/:id', (req, res) => {
+router.get('/fines/delete/:id', authController.isAuthenticated, authController.checkGuest, (req, res) => {
   const id = req.params.id;
 
   // Primero, obtener el id_prestamo desde la tabla sancion
@@ -888,7 +888,7 @@ router.get('/fines/delete/:id', (req, res) => {
 });
 
 //RUTA EDITAR SANCIONES
-router.get('/fines/edit/:id', (req, res) => {
+router.get('/fines/edit/:id', authController.isAuthenticated, authController.checkGuest, (req, res) => {
     const id = req.params.id;
     conexion.query('SELECT * FROM sancion WHERE id = ?', [id], (error, results) => {
         if (error) {
@@ -909,17 +909,17 @@ router.get('/fines/edit/:id', (req, res) => {
 
 
 const crud =require('../controllers/crud')
-router.post('/saveBook', crud.saveLibro) // invocar funcion para Guardar nuevo libro 
-router.post('/updateBook', crud.updateLibro)  // invocar funcion para actualizar libro
-router.post('/updateUser', crud.updateUsuario) // invocar funcion para actualizar usuario
-router.post('/saveTeacher', crud.saveTeacher) // invocar funcion para Guardar nuevo Profesor
-router.post('/saveStudent', crud.saveStudent) // invocar funcion para Guardar nuevo Estudiante
-router.post('/savePadmin', crud.savePadmin) // invocar funcion para Guardar nuevo P administrativo
-router.post('/saveLoan', crud.saveLoan) 
-router.post('/updateLoan', crud.updateLoan) 
-router.post('/saveSanction', crud.saveSanction);
+router.post('/saveBook', authController.isAuthenticated, authController.checkGuest, crud.saveLibro) // invocar funcion para Guardar nuevo libro 
+router.post('/updateBook', authController.isAuthenticated, authController.checkGuest, crud.updateLibro)  // invocar funcion para actualizar libro
+router.post('/updateUser', authController.isAuthenticated, authController.checkGuest, crud.updateUsuario) // invocar funcion para actualizar usuario
+router.post('/saveTeacher', authController.isAuthenticated, authController.checkGuest, crud.saveTeacher) // invocar funcion para Guardar nuevo Profesor
+router.post('/saveStudent', authController.isAuthenticated, authController.checkGuest, crud.saveStudent) // invocar funcion para Guardar nuevo Estudiante
+router.post('/savePadmin', authController.isAuthenticated, authController.checkGuest, crud.savePadmin) // invocar funcion para Guardar nuevo P administrativo
+router.post('/saveLoan', authController.isAuthenticated, authController.checkGuest, crud.saveLoan) 
+router.post('/updateLoan', authController.isAuthenticated, authController.checkGuest, crud.updateLoan) 
+router.post('/saveSanction', authController.isAuthenticated, authController.checkGuest, crud.saveSanction);
 router.get('/validateLoan/:id', crud.validateLoan);
-router.post('/updateFine', crud.updateFine);
+router.post('/updateFine', authController.isAuthenticated, authController.checkGuest, crud.updateFine);
 
 
 
